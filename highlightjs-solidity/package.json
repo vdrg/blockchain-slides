@@ -1,0 +1,90 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "highlightjs-solidity",
+        "scope": null,
+        "escapedName": "highlightjs-solidity",
+        "name": "highlightjs-solidity",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/home/vdrg/UC/Distribuidos/blockchain-slides"
+    ]
+  ],
+  "_from": "highlightjs-solidity@latest",
+  "_id": "highlightjs-solidity@1.0.5",
+  "_inCache": true,
+  "_location": "/highlightjs-solidity",
+  "_nodeVersion": "6.2.1",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/highlightjs-solidity-1.0.5.tgz_1467950110165_0.7964599060360342"
+  },
+  "_npmUser": {
+    "name": "pospi",
+    "email": "pospi@spadgos.com"
+  },
+  "_npmVersion": "3.9.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "highlightjs-solidity",
+    "scope": null,
+    "escapedName": "highlightjs-solidity",
+    "name": "highlightjs-solidity",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/highlightjs-solidity/-/highlightjs-solidity-1.0.5.tgz",
+  "_shasum": "fabb925e9d7ddbb362471b9db5499583bfb2b4f3",
+  "_shrinkwrap": null,
+  "_spec": "highlightjs-solidity",
+  "_where": "/home/vdrg/UC/Distribuidos/blockchain-slides",
+  "author": {
+    "name": "pospi"
+  },
+  "bugs": {
+    "url": "https://github.com/pospi/highlightjs-solidity/issues"
+  },
+  "dependencies": {},
+  "description": "highlight.js syntax definition for Ethereum's Solidity language",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "fabb925e9d7ddbb362471b9db5499583bfb2b4f3",
+    "tarball": "https://registry.npmjs.org/highlightjs-solidity/-/highlightjs-solidity-1.0.5.tgz"
+  },
+  "gitHead": "9916ccbc95d5a9a2364dd63c5ab2fb296547c8a5",
+  "homepage": "https://github.com/pospi/highlightjs-solidity#readme",
+  "keywords": [
+    "Solidity",
+    "Ethereum",
+    "highlight.js",
+    "highlightjs",
+    "syntax"
+  ],
+  "license": "MIT",
+  "main": "solidity.js",
+  "maintainers": [
+    {
+      "name": "pospi",
+      "email": "pospi@spadgos.com"
+    }
+  ],
+  "name": "highlightjs-solidity",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/pospi/highlightjs-solidity.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.5"
+}
