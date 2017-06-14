@@ -2,9 +2,10 @@
 <html>
 
 <head>
-    <title>Blockchain</title>
+    <title>Bitcoin</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="./assets/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -12,9 +13,136 @@
 
 class: center, middle, inverse
 
-# Blockchain
+# Bitcoin
 
 ### Vicente Dragicevic
+---
+# ¿Bitcoin? ¿Se come?
+
+--
+*"Bitcoin: A Peer-to-Peer Electronic Cash System"*
+
+--
+* Red Peer-to-Peer (conección a través de los **wallets**)
+
+--
+* Moneda digital (bitcoin)
+
+--
+* Libro de contabilidad **distribuido**, **descentralizado** e **inmutable**
+
+---
+class: center, middle, inverse
+# Basics
+---
+layout: true
+# Basics
+
+---
+--
+## Direcciones
+
+--
+* Para generar una dirección:
+
+--
+  1. Generar llave privada aleatoria (256 bits)
+
+--
+  2. Computar llave pública (curvas elípticas)
+
+--
+* Firmas digitales
+
+---
+--
+## Transacciones
+
+--
+Contienen (entre otros) una lista de **inputs** y una lista de **outputs**.
+
+--
+* Output:
+
+--
+  * Cantidad de *satoshis*
+
+--
+  * **locking script** (ScriptPubKey)
+
+
+
+--
+* Input:
+
+--
+  * Apunta a un **output no gastado**
+
+--
+  * **unlocking script** (ScriptSig)
+
+---
+## Transacciones
+
+--
+Creamos una transacción. ¿Y ahora qué?
+
+
+--
+¿Quién decide lo que se agrega al historial?
+
+---
+--
+## Mining (idea general)
+
+--
+ Objetivos:
+
+--
+* Descentralizar la creación de monedas
+
+--
+* Generar confianza sobre la validez de las transacciones
+
+---
+## Mining (idea general)
+
+--
+Competencia entre los *miners*:
+
+--
+* Elegir un grupo de nuevas transacciones y verificarlas
+
+--
+* Empaquetar transacciones en un *bloque*
+
+--
+* Resolver problema criptográfico para *validar el bloque*
+
+
+--
+Ganador hace broadcast del bloque y recibe una recompensa.
+
+
+--
+Dificultad del problema se ajusta dinámicamente (alguien gana cada 10 minutos).
+---
+class: center, middle, inverse
+layout: false
+# Deep Dive
+---
+# Componentes principales:
+
+--
+* Blockchain
+
+--
+* Mecanismos de consenso
+
+---
+class: center, middle, inverse
+# Deep Dive
+## Blockchain
 ---
 # Blockchain
 
@@ -22,61 +150,87 @@ class: center, middle, inverse
 * Cadena de bloques...
 
 --
-* Cada bloque contiene (entre otros):
+* Cada bloque almacena el **hash** del bloque anterior
 
 --
-  * Lista de transacciones
 
---
-  * Header:
 
---
-      * Hash del header del bloque anterior
-      * Timestamp
-      * **Nonce**
+<img src="./assets/images/blockchain.png" style="width: 1000px"/>
+
 ---
-# Blockchain
+layout: true
+# Blockchain (Bitcoin)
 
+---
+--
+En Bitcoin, cada bloque contiene:
+
+--
+* Block Size
+
+--
+* Block Header (metadatos)
+
+--
+* Transaction Counter
+
+--
+* Transactions
+
+---
+--
+## Header
+
+--
+* Version
+
+--
+* Previous Block Hash (SHA256)
+
+--
+* Merkle Root (Merkle Tree de transacciones)
+
+--
+* Timestamp
+
+--
+* Difficulty Target
+
+--
+* Nonce
+
+---
+--
 <img src="./assets/images/bitcoin_blockchain.png" style="width: 1000px"/>
 ---
 class: center, middle, inverse
-# Transacciones
+layout: false
+# Deep Dive
+## Mecanismos de Consenso
 ---
-# Transacciones
+# "La cadena más difícil de producir"
 
 --
-* Mueven fondos de una dirección a otra
+¿Cómo sabemos si nuestro blockchain es el "real"?
+
 
 --
-* Contienen (al menos):
+Todos los nodos tomarán como válida a **la cadena más difícil de producir**.
 
---
-  * Sender
-
---
-  * Firma del sender
-
---
-  * Cantidad a transferir
-
---
-  * Recipient
 ---
-class: center, middle, inverse
-# Mining
----
+layout: true
 # Mining
 
-## 2 funciones:
-
---
-* Crear confiaza
-
---
-* Crear nuevas monedas
 ---
-# Mining
+--
+## Objetivos (recordatorio):
 
+--
+* Descentralizar la creación de monedas
+
+--
+* Generar confianza sobre la validez de las transacciones
+---
 --
 1. Seleccionar transacciones que **no** han sido agregadas
 
@@ -84,7 +238,7 @@ class: center, middle, inverse
 2. **Verificar** transacciones
 
 --
-3. Incluir transacción de recompensa
+3. Crear transacción de recompensa
 
 --
 4. Empaquetar transacciones en un bloque
@@ -93,162 +247,101 @@ class: center, middle, inverse
 5. while(TRUE) *// Proof of Work*
 
 --
-  * h = hash(bloque)
+  * h = hash(block.header);
 
 --
   * if (h &lt target) break;
 
 --
-  * else **nonce**++ 
+  * else **block.header.nonce**++;
 
 --
 6. El bloque es **válido**
 ---
-# Mining: Proof-of-Work
-
 --
+
 * Broadcast del bloque validado
 
 --
+
+* Para comprobar validez del bloque, computar el hash del header y comparar al *target*
+
+--
+
 * Los otros *miners* deben volver a empezar
 
+---
 --
-* Todos le creen a la cadena **más "larga"**
+## Puntos importantes
+
+--
+
+* La recompensa que reciben los miners disminuye con el tiempo
+
+--
+
+* Probabilidad de minar un bloque = capacidad de computo del miner / capacidad total de la red
 
 ---
-# ¿Y para qué sirve?
-
-<img src="./assets/images/fork.png" style="width: 1000px">
----
-class: center, middle, inverse
-# Ethereum
----
-# Ethereum
+layout: false
+# Mining: Forks
 
 --
-* *Ether*
+¿Qué pasa si más de un miner encuentra un bloque válido al mismo tiempo?
 
 --
-* *Accounts*:
+
+* Nodos aceptan el primer bloque que reciben
 
 --
-  * Externally owned
+
+* Existirán 2 (o más) versiones del blockchain 
 
 --
-  * **Contract** accounts
-
----
-# Ethereum
-![](./assets/images/ethblockchain_full.png)
----
-# Smart Contracts
-
---
-* **Accounts** que contienen código
-
---
-* Lenguaje **Turing Completo**
-
---
-* Almacenan *ether*
-
---
-* Almacenan datos
-
---
-* Realizan transacciones
-
----
-# Ethereum: Mining
-
---
-* Proof of Work
-
---
-* Para validar transacciones, se revisa que el estado resultante sea consistente.
-
---
-* Si se hace una transacción a un **smart contract**, este se ejecuta.
-
---
-* Se paga por cada operación en el código.
----
-# Ethereum: Smart Contracts
-
-```solidity
-contract MyToken {
-    mapping (address => uint256) public balanceOf;          // Array of balances
-
-    function MyToken(uint256 initialSupply) {
-        balanceOf[msg.sender] = initialSupply;              // Give the creator all initial tokens
-    }
-
-    /* Send coins */
-    function transfer(address _to, uint256 _value) {
-        if (balanceOf[msg.sender] &lt _value) throw;           // Check if the sender has enough
-        if (balanceOf[_to] + _value &lt balanceOf[_to]) throw; // Check for overflows
-        balanceOf[msg.sender] -= _value;                     // Subtract from the sender
-        balanceOf[_to] += _value;                            // Add the same to the recipient
-    }
-}
-```
----
-class: center, middle, inverse
-# Smart Contracts: Casos de Uso
----
-# Decentralized Autonomous Organizations (DAOs)
-
-.left-column[
-* Gente (o contratos) compran acciones
-* Accionistas envían peticiones
-* Peticiones se aprueban por votación
-]
-
-.right-column[![](./assets/images/dao-crowd.png)]
----
-background-image: url(./assets/images/slockit.png)
-# Internet of Things
-
----
-class: center, middle
-
-# ¡Y mucho más!
-## Juegos
-## Apuestas
-## Marketplaces
-## ...
+* Eventualmente se resuelve, cuando una de las versiones supere a las demás
 
 ---
 class: center, middle, inverse
-
-# Futuro
+layout: false
+# Ataques 
 ---
-# Futuro
-
---
-* Smart Contracts + AI
-
---
-* Power Grids
-
---
-* IoT
-
---
-* Instituciones
+layout: true
+# Ataques
 
 ---
+--
+Si un adversario posee más del 50% de la capacidad de cómputo total de la red, creará bloques válidos más rápido que todo el resto de la red.
+
+
+--
+Pero mientras crea los bloques, la cadena original sigue creciendo.
+---
+--
+Pero... 
+
+--
+yo quería ser millonario :'(
+
+
+--
+Difícil... se estima que para el mining se gastan **~11 terawatt horas** de electricidad al año.
+
+
+--
+Para el Large Hadron Collider se gastan **~1.3 terawatt horas** al año.
+
+---
+layout: false
 class: center, middle, inverse
 # Fin!
 
 
     </textarea>
-    <script src="./assets/remark.min.js"></script>
-    <script type="text/javascript">
-      var hljs = remark.highlighter.engine;
-    </script>
-    <script src="./highlightjs-solidity/solidity.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/remark/0.14.0/remark.min.js"></script>
+    <script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css">
     <script>
+
         var slideshow = remark.create({
             ratio: '16:9',
             highlightStyle: 'solarized-dark',
@@ -256,6 +349,10 @@ class: center, middle, inverse
             countIncrementalSlides: false
         });
 
+
+        $('.mermaid > p').contents().unwrap();
+        mermaid.initialize({startOnLoad:true});
+        
     </script>
 </body>
 
